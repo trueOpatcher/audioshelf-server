@@ -5,14 +5,15 @@ const path = require('path');
 
 const mongoose = require('mongoose');
 const PORT = process.env.PORT || 3000;
-const MONGO_URI = process.env.MONGO_URI;
+const MONGO_URI = process.env.MONGO_URI || 'mongodb+srv://Maxx:w290982w@cluster0.fnxqo.mongodb.net/audioshelf?retryWrites=true&w=majority';
 
 const authRoutes = require('./routes/auth');
 const audioRoutes = require('./routes/audio');
 const audiostoreRoutes = require('./routes/audiostore');
 
 const options = {
-    root: path.join(__dirname, '../', 'views')
+    root: path.join(__dirname, 'views')
+    
 };
 
 const page404 = require('./routes/404');
@@ -61,6 +62,7 @@ app.use('*', (req, res) => {
 
 
 mongoose.connect(MONGO_URI).then(() => {
+    
     app.listen(PORT);
     console.log('connected');
 }).catch(error => {
