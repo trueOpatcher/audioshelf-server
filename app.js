@@ -4,7 +4,6 @@ const bodyParser = require('body-parser');
 const path = require('path');
 
 const mongoose = require('mongoose');
-const PORT = process.env.PORT || 3000;
 const MONGO_URI = process.env.MONGO_URI || 'mongodb+srv://Maxx:w290982w@cluster0.fnxqo.mongodb.net/audioshelf?retryWrites=true&w=majority';
 
 const authRoutes = require('./routes/auth');
@@ -63,8 +62,8 @@ app.use('*', (req, res) => {
 
 mongoose.connect(MONGO_URI).then(() => {
     
-    app.listen(PORT);
-    console.log(PORT);
+    app.listen(process.env.PORT || 3000);
+    console.log(process.env.PORT);
     console.log(process.env.MONGO_URI);
     console.log('connected');
 }).catch(error => {
