@@ -63,8 +63,8 @@ app.use('*', (req, res) => {
 mongoose.connect(MONGO_URI).then(() => {
     
     app.listen(process.env.PORT || 3000);
-    console.log(process.env.PORT);
-    console.log(process.env.MONGO_URI);
+    console.log('PORT',process.env.PORT);
+    console.log('URI',process.env.MONGO_URI);
     console.log('connected');
 }).catch(error => {
     console.log(error);
