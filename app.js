@@ -64,6 +64,9 @@ app.use('*', (req, res) => {
 mongoose.connect(MONGO_URI).then(() => {
     
     app.listen(PORT);
+
+    console.log(PORT);
+    console.log(MONGO_URI);
     console.log('connected');
 }).catch(error => {
     console.log(error);
