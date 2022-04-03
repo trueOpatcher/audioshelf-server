@@ -51,7 +51,7 @@ app.use(express.static(path.join(__dirname, 'views')));
 app.use(session({ secret: 'secret', resave: false, saveUninitialized: false, store: store }));
 
 app.use('/auth', authRoutes);
-app.use(page404);
+// app.use(page404);
 app.use('/audio', audioRoutes);
 app.use('/audiostore', audiostoreRoutes);
 
@@ -62,7 +62,7 @@ app.use('*', (req, res) => {
 
 
 mongoose.connect(MONGO_URI).then(() => {
-
+    
     app.listen(PORT);
     console.log('connected');
 }).catch(error => {
