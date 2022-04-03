@@ -5,7 +5,7 @@ const path = require('path');
 
 const mongoose = require('mongoose');
 const PORT = process.env.PORT || 3000;
-const MONGO_URI = process.env.MONGO_URI;
+const MONGO_URI = process.env.MONGO_URI || 'mongodb+srv://Maxx:w290982w@cluster0.fnxqo.mongodb.net/audioshelf?retryWrites=true&w=majority';
 
 const authRoutes = require('./routes/auth');
 const audioRoutes = require('./routes/audio');
@@ -64,9 +64,8 @@ app.use('*', (req, res) => {
 mongoose.connect(MONGO_URI).then(() => {
     
     app.listen(PORT);
-
     console.log(PORT);
-    console.log(MONGO_URI);
+    console.log(process.env.MONGO_URI);
     console.log('connected');
 }).catch(error => {
     console.log(error);
