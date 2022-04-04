@@ -1,9 +1,9 @@
-const SERVER_URL = process.env.PORT || 'http://localhost:3000';
+
 const mongoose = require('mongoose');
 const Folder = require('../models/folder');
 const multer = require('multer');
 const Img = require('../models/image');
-
+const SERVER_URL = process.env.SERVER_URL || 'http://localhost:3000';
 
 exports.fetch_folder = (req, res) => {
     const db = mongoose.connection.db;

@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const multer = require('multer');
 
 const Mp3 = require('../models/mp3');
-const SERVER_URL = process.env.PORT || 'http://localhost:3000';
+const SERVER_URL = process.env.SERVER_URL || 'http://localhost:3000';
 
 
 
