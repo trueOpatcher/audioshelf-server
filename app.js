@@ -49,6 +49,7 @@ store.on('error', error => {
     console.log(error);
 });
 
+app.enable('trust proxy');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
