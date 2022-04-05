@@ -33,7 +33,7 @@ app.use('*', function(req, res, next) {
         console.log('host', req.headers.host);
         console.log('url ', req.url);
         console.log('https://' + req.headers.host + req.url);
-        res.redirect(301, 'https://' + req.headers.host + req.url);
+        res.redirect('https://' + req.headers.host + req.url);
     }
     
 })
