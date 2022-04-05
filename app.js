@@ -25,28 +25,6 @@ const MongoDBStore = require('connect-mongodb-session')(session);
 
 
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(express.static(path.join(__dirname, 'views')));
-app.use(session({ secret: 'secret', resave: false, saveUninitialized: false, store: store }));
-
-
-
-app.use('*', function(req, res, next) {
-    console.log(req.protocol);
-    
-    if(req.protocol == 'https') {
-        console.log('in https');
-      next();
-    } else {
-        console.log('in http');
-        console.log('host', req.headers.host);
-        console.log('url ', req.url);
-        console.log('https://' + req.headers.host + req.url);
-        res.redirect('https://' + req.headers.host + req.url);
-    }
-    
-})
 
 
 
@@ -70,6 +48,31 @@ const store = new MongoDBStore({
 store.on('error', error => {
     console.log(error);
 });
+
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(express.static(path.join(__dirname, 'views')));
+app.use(session({ secret: 'secret', resave: false, saveUninitialized: false, store: store }));
+
+
+
+app.use('*', function(req, res, next) {
+    console.log(req.protocol);
+    
+    if(req.protocol == 'https') {
+        console.log('in https');
+      next();
+    } else {
+        console.log('in http');
+        console.log('host', req.headers.host);
+        console.log('url ', req.url);
+        console.log('https://' + req.headers.host + req.url);
+        res.redirect('https://' + req.headers.host + req.url);
+    }
+    
+})
+
 
 
 
