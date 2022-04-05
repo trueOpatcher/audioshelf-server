@@ -24,6 +24,7 @@ const MongoDBStore = require('connect-mongodb-session')(session);
 
 app.use('*', function(req, res, next) {
     console.log('url', req.url);
+    console.log(req.protocol);
     console.log('host', req.headers.host);
     // if (req.secure) {
     //     console.log('secure');
