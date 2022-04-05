@@ -22,6 +22,16 @@ const session = require('express-session')
 const MongoDBStore = require('connect-mongodb-session')(session);
 
 
+
+
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(express.static(path.join(__dirname, 'views')));
+app.use(session({ secret: 'secret', resave: false, saveUninitialized: false, store: store }));
+
+
+
 app.use('*', function(req, res, next) {
     console.log(req.protocol);
     
@@ -62,13 +72,6 @@ store.on('error', error => {
 });
 
 
-
-
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(express.static(path.join(__dirname, 'views')));
-app.use(session({ secret: 'secret', resave: false, saveUninitialized: false, store: store }));
 
 app.use('/auth', authRoutes);
 // app.use(page404);
