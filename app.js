@@ -23,23 +23,15 @@ const MongoDBStore = require('connect-mongodb-session')(session);
 
 
 app.use('*', function(req, res, next) {
-    console.log('url', req.url);
-    console.log(req.protocol);
-    console.log('host', req.headers.host);
-    // if (req.secure) {
-    //     console.log('secure');
-    // } else {
-    //     console.log('not secure');
-    // }
-    // if(req.secure) {
-    //   next();
-    // } else {
-    //     console.log('https://' + req.headers.host + req.url);
-    //     res.redirect(301, 'https://' + req.headers.host + req.url);
-    //     res.end();
-    // }
     
-    next();
+    
+    if(req.protocol === 'https') {
+      next();
+    } else {
+        res.redirect(301, 'https://' + req.headers.host + req.url);
+        res.end();
+    }
+    
 })
 
 
