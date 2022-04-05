@@ -52,23 +52,17 @@ store.on('error', error => {
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
-app.use(express.static(path.join(__dirname, 'views')));
+app.use(express.static(path.join(__dirname)));
 app.use(session({ secret: 'secret', resave: false, saveUninitialized: false, store: store }));
 
 
 
 app.use('*', function(req, res, next) {
-    console.log(req.protocol);
-    
     if(req.protocol == 'https') {
-        console.log('in https');
       next();
     } else {
-        console.log('in http');
-        console.log('host', req.headers.host);
-        console.log('url ', req.url);
-        console.log('https://' + req.headers.host + req.url);
-        res.redirect('https://' + req.headers.host + req.url);
+        res.redirect("https://" + req.headers.host + req.url);
+        res.end();
     }
     
 })
@@ -77,7 +71,6 @@ app.use('*', function(req, res, next) {
 
 
 app.use('/auth', authRoutes);
-// app.use(page404);
 app.use('/audio', audioRoutes);
 app.use('/audiostore', audiostoreRoutes);
 
