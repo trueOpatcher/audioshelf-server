@@ -22,6 +22,19 @@ const session = require('express-session')
 const MongoDBStore = require('connect-mongodb-session')(session);
 
 
+app.use('*', function(req, res, next) {
+
+    if(req.secure) {
+      next();
+    } else {
+        console.log('https://' + req.headers.host + req.url);
+        res.redirect(301, 'https://' + req.headers.host + req.url); 
+        next();
+    }
+
+});
+
+
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-allow-Origin', 'http://localhost:4200');
@@ -45,16 +58,7 @@ store.on('error', error => {
 });
 
 
-app.use('*', function(req, res, next) {
 
-    if(req.secure) {
-      next();
-    } else {
-        res.redirect(301, 'https://' + req.headers.host + req.url); 
-        next();
-    }
-
-  });
 
 
 app.use(bodyParser.json());
