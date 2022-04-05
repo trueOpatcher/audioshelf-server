@@ -23,7 +23,11 @@ const MongoDBStore = require('connect-mongodb-session')(session);
 
 
 app.use('*', function(req, res, next) {
-
+    if (req.secure) {
+        console.log('secure');
+    } else {
+        console.log('not secure');
+    }
     if(req.secure) {
       next();
     } else {
