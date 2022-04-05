@@ -47,10 +47,12 @@ store.on('error', error => {
 
 app.use(function(req, res, next) {
 
-    if(!req.secure & PORT !== 3000) {
-      return res.redirect('https://audio-shelf.herokuapp.com');
+    if(req.secure) {
+      next();
+    } else {
+        return res.redirect('https://audio-shelf.herokuapp.com');
     }
-    next();
+    
   });
 
 
