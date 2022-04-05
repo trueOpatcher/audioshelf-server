@@ -27,7 +27,6 @@ const MongoDBStore = require('connect-mongodb-session')(session);
 
 
 
-
 app.use((req, res, next) => {
     res.setHeader('Access-Control-allow-Origin', 'http://localhost:4200');
     res.setHeader('Access-Control-allow-Methods', 'GET, POST, OPTIONS, PATCH, DELETE');
@@ -63,11 +62,11 @@ app.use('*', function(req, res, next) {
       next();
     } else {
         // console.log("https://" + req.headers.host + req.url);
-        res.redirect("https://" + req.headers.host + req.url);
-        res.end();
+        return res.redirect( 301, "https://" + req.headers.host + req.url);
     }
     
 })
+
 
 
 
