@@ -23,9 +23,9 @@ const MongoDBStore = require('connect-mongodb-session')(session);
 
 
 app.use('*', function(req, res, next) {
+    console.log(req.protocol);
     
-    
-    if(req.protocol === 'https') {
+    if(req.protocol == 'https') {
       next();
     } else {
         res.redirect(301, 'https://' + req.headers.host + req.url);
