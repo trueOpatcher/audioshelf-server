@@ -5,7 +5,7 @@ const path = require('path');
 
 const mongoose = require('mongoose');
 const PORT = process.env.PORT || 3000;
-const MONGO_URI = process.env.MONGO_URI || 'mongodb+srv://Maxx:w290982w@cluster0.fnxqo.mongodb.net/audioshelf?retryWrites=true&w=majority';
+const MONGO_URI = process.env.MONGO_URI;
 
 const authRoutes = require('./routes/auth');
 const audioRoutes = require('./routes/audio');
@@ -62,7 +62,7 @@ app.use('*', function(req, res, next) {
     if(req.secure) {
       next();
     } else {
-        console.log("https://" + req.headers.host + req.url);
+        // console.log("https://" + req.headers.host + req.url);
         res.redirect("https://" + req.headers.host + req.url);
         res.end();
     }
