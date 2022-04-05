@@ -28,8 +28,8 @@ app.use('*', function(req, res, next) {
       next();
     } else {
         console.log('https://' + req.headers.host + req.url);
-        res.redirect(301, 'https://' + req.headers.host + req.url); 
-        next();
+        res.redirect(301, 'https://' + req.headers.host + req.url);
+        res.end();
     }
 
 });
