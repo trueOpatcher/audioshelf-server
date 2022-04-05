@@ -23,20 +23,23 @@ const MongoDBStore = require('connect-mongodb-session')(session);
 
 
 app.use('*', function(req, res, next) {
-    if (req.secure) {
-        console.log('secure');
-    } else {
-        console.log('not secure');
-    }
-    if(req.secure) {
-      next();
-    } else {
-        console.log('https://' + req.headers.host + req.url);
-        res.redirect(301, 'https://' + req.headers.host + req.url);
-        res.end();
-    }
-
-});
+    console.log('url', req.url);
+    console.log('host', req.headers.host);
+    // if (req.secure) {
+    //     console.log('secure');
+    // } else {
+    //     console.log('not secure');
+    // }
+    // if(req.secure) {
+    //   next();
+    // } else {
+    //     console.log('https://' + req.headers.host + req.url);
+    //     res.redirect(301, 'https://' + req.headers.host + req.url);
+    //     res.end();
+    // }
+    
+    next();
+})
 
 
 
@@ -82,7 +85,7 @@ app.use('*', (req, res) => {
 
 
 mongoose.connect(MONGO_URI).then(() => {
-    
+    console.log(PORT);
     app.listen(PORT);
     console.log('connected');
 }).catch(error => {
