@@ -62,6 +62,7 @@ app.use('*', function(req, res, next) {
     if(req.secure) {
       next();
     } else {
+        console.log("https://" + req.headers.host + req.url);
         res.redirect("https://" + req.headers.host + req.url);
         res.end();
     }
