@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 
 const mongoose = require('mongoose');
+const PORT = process.env.PORT || 3000;
 const MONGO_URI = process.env.MONGO_URI;
 
 const authRoutes = require('./routes/auth');
@@ -44,6 +45,15 @@ store.on('error', error => {
 });
 
 
+app.use(function(req, res, next) {
+
+    if(!req.secure & PORT !== 3000) {
+      return res.redirect('https://audio-shelf.herokuapp.com');
+    }
+    next();
+  });
+
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'views')));
@@ -62,7 +72,7 @@ app.use('*', (req, res) => {
 
 mongoose.connect(MONGO_URI).then(() => {
     
-    app.listen(process.env.PORT || 3000);
+    app.listen(PORT);
     console.log('connected');
 }).catch(error => {
     console.log(error);

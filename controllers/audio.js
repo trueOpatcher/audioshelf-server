@@ -8,6 +8,10 @@ const SERVER_URL = process.env.SERVER_URL || 'http://localhost:3000';
 
 exports.upload_audio = (req, res, next) => {
 
+    if(req.session.email !== 'testa@gmail.com') {
+        return res.status(400).send({message: 'Available only for Maxx :))'});
+    }
+
     const db = mongoose.connection.db;
     const storage = multer.memoryStorage();
     const upload = multer({ storage: storage });

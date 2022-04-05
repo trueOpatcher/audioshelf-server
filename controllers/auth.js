@@ -83,7 +83,7 @@ exports.get_isAuth = (req, res, next) => {
 
 exports.get_isAdmin = (req, res) => {
     const user = req.session.email;
-    if(user === 'testy@gmail.com') {
+    if(user === 'testy@gmail.com' | 'testa@gmail.com') {
         res.send(true);
     } else {
         res.send(false);

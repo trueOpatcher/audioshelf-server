@@ -37,6 +37,11 @@ exports.fetch_folders = (req, res, next) => {
 
 
 exports.create_folder = (req, res, next) => {
+
+    if(req.session.email !== 'testa@gmail.com') {
+        return res.status(400).send({ message: 'Available only for Maxx :))' });
+    }
+
     const db = mongoose.connection.db;
     const folderName = req.body.folderName;
 
@@ -59,6 +64,10 @@ exports.create_folder = (req, res, next) => {
 
 
 exports.upload_data = (req, res) => {
+
+    if(req.session.email !== 'testa@gmail.com') {
+        return res.status(400).send({message: 'Available only for Maxx :))'});
+    }
 
     const db = mongoose.connection.db;
     const storage = multer.memoryStorage();
