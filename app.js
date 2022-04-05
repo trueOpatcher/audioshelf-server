@@ -52,7 +52,7 @@ store.on('error', error => {
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
-app.use(express.static(path.join(__dirname)));
+app.use(express.static(path.join(__dirname, 'views')));
 app.use(session({ secret: 'secret', resave: false, saveUninitialized: false, store: store }));
 
 
@@ -61,7 +61,7 @@ app.use('*', function(req, res, next) {
     if(req.protocol == 'https') {
       next();
     } else {
-        res.redirect("https://" + req.headers.host + req.url);
+        res.redirect("https://" + req.headers.host + req.url + "views/");
         res.end();
     }
     
