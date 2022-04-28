@@ -47,7 +47,7 @@ store.on('error', error => {
     console.log(error);
 });
 
-app.enable('trust proxy');
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
@@ -60,7 +60,6 @@ app.use('*', function(req, res, next) {
     if(req.secure) {
       next();
     } else {
-        // console.log("https://" + req.headers.host + req.url);
         return res.redirect( 301, "https://" + req.headers.host + req.url);
     }
 })
